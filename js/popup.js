@@ -24,13 +24,12 @@ function MergeSub(){
             var merged_text = '';
             for (var i = 0; i < timeArray.length; i++) {
                 if(timeArray[i].includes('Dialogue')) {
-                    timeArray[i] += textArray[0];
+                    timeArray[i] = ReplaceText(timeArray[i], textArray[0]);
                     textArray.shift();
                 }
                 merged_text = merged_text + timeArray[i] + "\n";
             }
-            document.getElementById('title-time').innerHTML = merged_text;
-            createDownload('sub.ass', merged_text);
+            CreateDownload('sub.ass', merged_text);
         };
 
         textReader.readAsText(textFile, "UTF-8");
@@ -40,7 +39,7 @@ function MergeSub(){
     timeReader.readAsText(timeFile, "UTF-8");
 }
 
-function createDownload(filename, text) {
+function CreateDownload(filename, text) {
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
@@ -51,6 +50,17 @@ function createDownload(filename, text) {
   element.click();
 
   document.body.removeChild(element);
+}
+
+function ReplaceText(old, correct) {
+  var count = 0;
+  var index = 0;
+  while(count < 9 ) {
+    index = old.indexOf(',', (index + 1));
+    count++;
+  }
+  var head = old.slice(0, index + 1);
+  return head + correct;
 }
 
 
