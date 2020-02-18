@@ -1,6 +1,7 @@
- 
-// Author    : 9fury
-// Facebook  : fb.com/sonvuhong9fury
+/* 
+* Author    : 9fury
+* Facebook  : fb.com/sonvuhong9fury
+*/
 
 $("#merge").on('click', function(){
     MergeSub();
